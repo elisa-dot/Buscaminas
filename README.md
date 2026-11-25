@@ -57,7 +57,6 @@ Buscaminas/
     └── REPORTE_LM.md
 ```
 
-> Ajusta los nombres de archivos para que coincidan con los que quedaron al final en el repositorio.
 
 ## Cómo ejecutar
 
