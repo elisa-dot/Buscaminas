@@ -72,8 +72,7 @@ python3 main.py
 - **Clic derecho:** colocar o quitar una bandera.
 - Al descubrir una casilla vacía se descubren automáticamente sus vecinos.
 - Se gana al descubrir todas las casillas sin mina. Se pierde al descubrir una mina, y entonces se muestran todas.
-- El temporizador empieza con la primera jugada y se detiene al terminar la partida.
-- Para empezar de nuevo se puede usar el botón de nueva partida y elegir el nivel.
+
 
 ## Arquitectura
 
