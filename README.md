@@ -106,12 +106,5 @@ python3 -m unittest discover pruebas -v
 | `test_eventos.py` | Que los observadores reciban los eventos |
 | `test_niveles.py` | Que la fábrica cree los tres niveles con el tamaño y las minas correctos |
 
-## Pruebas manuales de la interfaz
-
-- [ ] Los tres niveles se pueden elegir y el tablero tiene el tamaño correcto.
-- [ ] El clic izquierdo descubre y el derecho pone o quita bandera.
-- [ ] Una casilla vacía expande a sus vecinos sin pasar por banderas.
-- [ ] Al perder se muestran todas las minas y el tablero deja de responder.
-- [ ] Al ganar el tablero deja de responder.
 - [ ] El temporizador inicia con la primera jugada y se detiene al terminar.
 - [ ] El botón de nueva partida reinicia el tablero y el temporizador.
