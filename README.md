@@ -118,5 +118,3 @@ python3 -m unittest discover pruebas -v
 - El temporizador inicia con la primera jugada y se detiene al terminar.
 - El botón de nueva partida reinicia el tablero y el temporizador.
 
-- [ ] El temporizador inicia con la primera jugada y se detiene al terminar.
-- [ ] El botón de nueva partida reinicia el tablero y el temporizador.
