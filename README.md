@@ -50,9 +50,10 @@ Buscaminas/
 │   ├── __init__.py
 │   ├── aplicacion.py
 │   └── tablero.py
-├── tests/
+├── pruebas/
 │   ├── __init__.py
-│   └──
+│   ├── test_mina.py
+│   └── test_modelo.py
 └── docs/
     ├── reporte_tecnico.pdf
     └── reporte_modelado_de_lenguaje.pdf
@@ -108,6 +109,12 @@ python3 -m unittest discover pruebas -v
 | `test_minas.py` | Colocación de minas aleatoria y fija |
 | `test_eventos.py` | Que los observadores reciban los eventos |
 | `test_niveles.py` | Que la fábrica cree los tres niveles con el tamaño y las minas correctos |
+
+Las pruebas se pueden ejecutar por archivo con:
+
+```bash
+python3 -m unittest pruebas.test_motor
+```
 
 ## Pruebas manuales de la interfaz
 
