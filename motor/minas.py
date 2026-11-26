@@ -4,7 +4,7 @@ import random
 from abc import ABC, abstractmethod
 
 class estrategiaMinas(ABC):
-    @abstractmothod
+    @abstractmethod
     def colocar(self, filas, columnas, cantidad):
         ...
 
@@ -20,7 +20,7 @@ class minasAleatorias(estrategiaMinas):
 
         for f in range(filas):
             for c in range(columnas):
-                possiciones_tablero.append((f,c))
+                posiciones_tablero.append((f,c))
 
         return set(self._rdm.sample(posiciones_tablero,cantidad))
 
@@ -31,8 +31,8 @@ class minasFijas(estrategiaMinas):
 
     def colocar(self, filas, columnas, cantidad = None):
         for f,c in self._posiciones:
-            if nor (0 <= f < filas and 0 <= c< columnas):
-                raise ValueError(f"Mina fiera del tablero")
+            if not (0 <= f < filas and 0 <= c< columnas):
+                raise ValueError(f"Mina fuera del tablero")
             return set(self._posiciones)
     
 

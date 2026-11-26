@@ -27,6 +27,7 @@ class Tablero:
         self.casillas = []
 
         for _ in range(filas):
+            fila = []
             for _ in range(columnas):
                 fila.append(Casilla())
             self.casillas.append(fila)
@@ -44,7 +45,7 @@ class Tablero:
                 self.casillas[f][c].minas_vecinas = contador
 
     def en_rango(self,f,c):
-        return 0 <= f < self.filas and 0<= c <= self.columnas
+        return 0 <= f < self.filas and 0<= c < self.columnas
 
     def casilla(self, f, c):
         if not self.en_rango(f,c):
@@ -60,11 +61,11 @@ class Tablero:
         return resultado
 
 class Juego:
-    def __init__(self,filas,columnas,minas,estrategia=NONE, mensaje=NONE):
-        if estrategia is NONE:
+    def __init__(self,filas,columnas,minas,estrategia=None, mensaje=None):
+        if estrategia is None:
             estrategia = minasAleatorias()
         
-        if not isintance(estrategia, estrategiaMinas):
+        if not isinstance(estrategia, estrategiaMinas):
             raise TypeError("estrategia no válida")
         
         self.tablero = Tablero(filas,columnas, estrategia.colocar(filas,columnas,minas))
