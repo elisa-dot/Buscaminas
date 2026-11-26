@@ -36,9 +36,9 @@ El proyecto no necesita instalar dependencias externas. Las pruebas usan `unitte
 ```
 Buscaminas/
 ├── README.md
-├── main.py
 ├── motor/
 │   ├── __init__.py
+│   ├── main.py
 │   ├── modelo.py
 │   ├── minas.py
 │   ├── eventos.py
@@ -50,11 +50,12 @@ Buscaminas/
 │   ├── __init__.py
 │   ├── aplicacion.py
 │   └── tablero.py
-├── pruebas/
-│   └── __init__.py
+├── tests/
+│   ├── __init__.py
+│   └──
 └── docs/
     ├── reporte_tecnico.pdf
-    └── REPORTE_LM.md
+    └── reporte_modelado_de_lenguaje.pdf
 ```
 
 
