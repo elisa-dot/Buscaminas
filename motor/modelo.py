@@ -10,7 +10,6 @@ class Estado(Enum):
     EN_CURSO = "en curso"
     GANADO = "ganado"
     PERDIDO = "perdido"
-
 class Casilla:
     def __init__(self):
         self.tiene_mina = False
