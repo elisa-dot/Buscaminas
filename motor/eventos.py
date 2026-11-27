@@ -6,7 +6,7 @@ El motor publica eventos sin conocer Tkinter ni ninguna clase de interfaz.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Protocol, runtime_checkable
+from typing import Callable, Protocol, runtime_checkable
 
 
 @runtime_checkable
@@ -51,3 +51,42 @@ class ModeloObservable:
         # La copia permite desuscribirse durante la actualización sin romper el ciclo.
         for observador in tuple(self._observadores):
             observador.actualizar(evento)
+
+
+class AdaptadorEventosMotor:
+    """Conecta el callback emit() del motor existente con observadores MVC."""
+
+    def __init__(self, motor: object, observador: Observador) -> None:
+        if not isinstance(observador, Observador):
+            raise TypeError("El observador debe implementar actualizar(evento)")
+        if not hasattr(motor, "notificar"):
+            raise AttributeError("El motor no expone el callback notificar")
+
+        self.motor = motor
+        self.observador = observador
+        self._callback_original: Callable[..., object] | None = getattr(motor, "notificar", None)
+        self.conectado = False
+
+    def conectar(self) -> None:
+        """Instala el adaptador sin eliminar el callback configurado previamente."""
+        if self.conectado:
+            return
+
+        setattr(self.motor, "notificar", self._recibir_evento)
+        self.conectado = True
+
+    def desconectar(self) -> None:
+        """Restaurar el callback original al desuscribir la vista."""
+        if not self.conectado:
+            return
+
+        setattr(self.motor, "notificar", self._callback_original)
+        self.conectado = False
+
+    def _recibir_evento(self, tipo: str, **datos: object) -> None:
+        evento = EventoModelo(tipo=tipo, datos=datos or None)
+
+        if self._callback_original is not None:
+            self._callback_original(tipo, **datos)
+
+        self.observador.actualizar(evento)
