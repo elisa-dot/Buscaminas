@@ -1,7 +1,7 @@
 import unittest
 
 from controlador.controlador import ConfiguracionNivel, Controlador, FabricaNiveles
-from motor.eventos import ModeloObservable
+from motor.eventos import AdaptadorEventosMotor, ModeloObservable
 
 
 # Doble del motor: registra llamadas sin ejecutar tablero, minas ni interfaz.
@@ -109,6 +109,25 @@ class PruebasObserver(unittest.TestCase):
 
         modelo.quitar_observador(vista)
         modelo.notificar("cambio")
+        self.assertEqual(1, len(vista.eventos))
+
+    def test_adaptador_con_callback_existente(self):
+        clase_motor = type("MotorConCallback", (), {})
+        motor = clase_motor()
+        motor.recibidos = []
+        motor.notificar = lambda tipo, **datos: motor.recibidos.append((tipo, datos))
+        vista = VistaFalsa()
+
+        adaptador = AdaptadorEventosMotor(motor, vista)
+        adaptador.conectar()
+        motor.notificar("Casillas descubiertas", casillas=[(1, 2)])
+
+        self.assertEqual([("Casillas descubiertas", {"casillas": [(1, 2)]})], motor.recibidos)
+        self.assertEqual("Casillas descubiertas", vista.eventos[0].tipo)
+        self.assertEqual({"casillas": [(1, 2)]}, vista.eventos[0].datos)
+
+        adaptador.desconectar()
+        motor.notificar("bandera", fila=0, columna=1, puesta=True)
         self.assertEqual(1, len(vista.eventos))
 
 
